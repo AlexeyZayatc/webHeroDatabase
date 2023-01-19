@@ -1,0 +1,26 @@
+mixin block-content-2(myImg='1', t1='Нет заголовка', t2='Нет дополнительного описания', t3='Нет описания')  
+  hr
+  .block-title
+    img(src = myImg)
+    p.tit=t1
+    .subtitle
+      p=t2
+    .main-title
+      p=t3
+
+
+html 
+  head
+    include headCode
+    block title 
+  body 
+    .cont-2
+      .cont-1
+        .butt-1
+          a(href="index.html") Главная страница
+        .butt-1
+          a(href="Page_02.html") Все герои
+        .butt-1
+          a(href="Page_03.html") Дополнительно      
+    block content
+    .my-block-1
