@@ -361,3 +361,13 @@ td,
 summary {
   color: #fff;
 }
+.x-axis {
+  fill: #f00;
+  stroke: #f00;
+  letter-spacing: 0.2em;
+}
+.y-axis {
+  fill: #f00;
+  stroke: #f00;
+  letter-spacing: 0.2em;
+}

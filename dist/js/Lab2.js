@@ -55,7 +55,9 @@ let originalTable = [{ "name": "ABADDON", "attribute": "Intelligence", "role": "
 { "name": "ZEUS", "attribute": "Agility", "role": "Hardlane", "releaseDate": "2019", "maxHp": "1916", "maxArmor": "21", "maxMana": "1405" }
 ];
 
-
+function getOriginalTable() {
+    return originalTable;
+}
 
 function filter() {
     let nameInput = document.getElementById('nameInput')

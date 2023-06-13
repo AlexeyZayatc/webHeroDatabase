@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
     <link rel="stylesheet" href="css/main.css"/>
+    <script src="http://d3js.org/d3.v7.min.js"></script>
     <script src="js/Lab2.js"></script>
+    <script src="js/Lab3.js"></script>
     <title>Все герои</title>
   </head>
   <body> 
@@ -25,30 +27,24 @@
               <p>График:</p>
             </div>
             <div class="left-edge-1">
-              <p class="title-1">Значение по оси OХ: </p>
+              <p class="title-1">Значение по оси OХ:</p>
               <p>Main attribute
-                <input type="radio" name="ox" value="жанр"/>
+                <input id="ox1" type="radio" name="ox" value="attribute" checked="checked"/>
               </p>
               <p>Main role
-                <input type="radio" name="ox" value="жанр"/>
-              </p>
-              <p>Release date
-                <input type="radio" name="ox" value="жанр"/>
+                <input id="ox2" type="radio" name="ox" value="role"/>
               </p>
             </div>
             <div class="right-edge-1">
               <p class="title-1">Результат: </p>
-              <p>MAX HP
-                <input type="checkbox" name="result" value="макс"/>
+              <p>Release Date
+                <input id="oy1" type="radio" name="oy" value="releaseDate" checked="checked"/>
               </p>
               <p>MAX ARMOR
-                <input type="checkbox" name="result" value="мин"/>
-              </p>
-              <p>MAX MANA
-                <input type="checkbox" name="result" value="колво"/>
+                <input id="oy2" type="radio" name="oy" value="maxArmor"/>
               </p>
             </div>
-            <button>Построить </button>
+            <button onclick="drawDiagramm();">Построить </button>
           </div>
         </div>
         <div class="block-02">
@@ -167,6 +163,7 @@
       </div>
     </details>
     <div class="my-block-1"></div>
+    <svg></svg>
     <table id="myTable">
       <script>filter();</script>
     </table>

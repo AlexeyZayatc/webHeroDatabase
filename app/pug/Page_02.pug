@@ -33,22 +33,18 @@ block content
             .title-1-1
               p График:
             .left-edge-1
-              p.title-1 Значение по оси OХ: 
+              p.title-1 Значение по оси OХ:
               p Main attribute
-                input(type='radio', name='ox', value='жанр')
+                input#ox1(type='radio',name="ox", value='attribute', checked=true)
               p Main role
-                input(type='radio', name='ox', value='жанр')
-              p Release date
-                input(type='radio', name='ox', value='жанр')
+                input#ox2(type='radio',name="ox",  value='role')
             .right-edge-1
               p.title-1 Результат: 
-              p MAX HP
-                input(type='checkbox', name='result', value='макс')
+              p Release Date
+                input#oy1(type='radio', name="oy", value='releaseDate',checked=true)
               p MAX ARMOR
-                input(type='checkbox', name='result', value='мин')
-              p MAX MANA
-                input(type='checkbox', name='result', value='колво')
-            button Построить 
+                input#oy2(type='radio',  name="oy",value='maxArmor')
+            button(onclick="drawDiagramm();") Построить 
         .block-02
           .table-2-2
             .table 
@@ -110,6 +106,6 @@ block content
             button(onclick="filter();") Построить 
     
     .my-block-1
-
+    svg
     table#myTable
       script filter();
