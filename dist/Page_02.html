@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
     <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/grid-gallery.css"/>
+    <link rel="stylesheet" type="text/css" href="css/grid-gallery.min.css"/>
     <script src="http://d3js.org/d3.v7.min.js"></script>
     <script src="js/Lab2.js"></script>
     <script src="js/Lab3.js"></script>
@@ -22,30 +24,38 @@
       <summary>Блок настроек показа: </summary>
       <div class="main-block">
         <div class="block-01">
-          <div class="table"> 
-            <div class="title-1-1">
-              <p>График:</p>
+          <form name="graph">
+            <div class="table"> 
+              <div class="title-1-1">
+                <p>График:</p>
+              </div>
+              <div class="left-edge-1">
+                <p class="title-1">Значение по оси OХ:</p>
+                <p>Hero name
+                  <input type="radio" name="ox" value="name" checked="checked"/>
+                </p>
+                <p>Main attribute
+                  <input type="radio" name="ox" value="attribute"/>
+                </p>
+                <p>Main role
+                  <input type="radio" name="ox" value="role"/>
+                </p>
+              </div>
+              <div class="right-edge-1">
+                <p class="title-1">Значение по оси OY: </p>
+                <p>MIN HP
+                  <input type="radio" name="oy" value="minHP" checked="checked"/>
+                </p>
+                <p>MAX ARMOR
+                  <input type="radio" name="oy" value="maxArmor"/>
+                </p>
+                <p>AVG MANA
+                  <input type="radio" name="oy" value="avgMana"/>
+                </p>
+              </div>
+              <button type="button" onclick="drawDiagramm();">Построить </button>
             </div>
-            <div class="left-edge-1">
-              <p class="title-1">Значение по оси OХ:</p>
-              <p>Main attribute
-                <input id="ox1" type="radio" name="ox" value="attribute" checked="checked"/>
-              </p>
-              <p>Main role
-                <input id="ox2" type="radio" name="ox" value="role"/>
-              </p>
-            </div>
-            <div class="right-edge-1">
-              <p class="title-1">Результат: </p>
-              <p>Release Date
-                <input id="oy1" type="radio" name="oy" value="releaseDate" checked="checked"/>
-              </p>
-              <p>MAX ARMOR
-                <input id="oy2" type="radio" name="oy" value="maxArmor"/>
-              </p>
-            </div>
-            <button onclick="drawDiagramm();">Построить </button>
-          </div>
+          </form>
         </div>
         <div class="block-02">
           <div class="table-2-2">
@@ -169,4 +179,5 @@
     </table>
     <div class="my-block-1"></div>
   </body>
+  <script type="text/javascript" src="js/grid-gallery.js"></script>
 </html>

@@ -1,8 +1,11 @@
 function groupData(data, groupField) {
+    // Группировка по полю groupField 
     return d3.group(data, row => row[groupField]);
 }
 
 function processGroup(groupRows, yField) {
+    // Обрабатывает сгруппированную группу строк groupRows в зависимости от значения yField 
+    // Возвращает числовое значение
     if (yField == "minHP") {
         let minHP = d3.min(groupRows.map((row) => row.maxHp));
         return minHP;
@@ -16,6 +19,10 @@ function processGroup(groupRows, yField) {
 }
 
 function getGraphData(xField, yField) {
+    /*
+    Преобразовывает изначальные данные в массив
+    [{<Поле по оси X>: <Сгрупированное значение по оси Y>}]
+    */
     let rows = getOriginalTable();
     let groupedData = groupData(rows, xField);
     let result = {};
@@ -28,6 +35,7 @@ function getGraphData(xField, yField) {
 }
 
 function getDataRange(graphData) {
+    // Находит размах данных по оси Y
     let values = Object.values(graphData);
     let dataMin = d3.min(values);
     let dataMax = d3.max(values);
@@ -51,17 +59,22 @@ function drawDiagramm() {
         .attr("width", width)
         .style("border", "red");
 
+    // очищаем svg перед построением 
     svg.selectAll("*").remove();
 
+    // определяем минимальное и максимальное значение по оси OY 
     let yRange = getDataRange(graphData);
     let min = yRange[0] * 0.95;
     let max = yRange[1] * 1.05;
 
+    // Вычисляем длины осей в пикселях
     let xAxisLen = width - 2 * marginX;
     let yAxisLen = height - 2 * marginY;
 
+    // Получаем все значения по оси X
     let xLabels = Object.keys(graphData);
 
+    // определяем шкалы для осей 
     let scaleX = d3.scaleBand()
         .domain(xLabels)
         .range([0, xAxisLen])
@@ -70,11 +83,11 @@ function drawDiagramm() {
         .domain([min, max])
         .range([yAxisLen, 0]);
 
+    // создаем оси 
+    let axisX = d3.axisBottom(scaleX); // горизонтальная
+    let axisY = d3.axisLeft(scaleY); // вертикальная 
 
-    let axisX = d3.axisBottom(scaleX);
-    let axisY = d3.axisLeft(scaleY);
-
-
+    // отображаем ось OX, устанавливаем подписи оси ОX и угол их наклона 
     svg.append("g")
         .attr("transform", `translate(${marginX}, ${height - marginY})`)
         .call(axisX)
@@ -84,32 +97,20 @@ function drawDiagramm() {
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-45)");
-
+    
+    // отображаем ось OY 
     svg.append("g")
         .attr("transform", `translate(${marginX}, ${marginY})`)
         .attr("class", "y-axis")
         .call(axisY);
-
-    d3.selectAll("g.x-axis g.tick")
-        .append("line")
-        .classed("grid-line", true)
-        .attr("x1", 0)
-        .attr("y1", 0)
-        .attr("x2", 0)
-        .attr("y2", - (yAxisLen));
-    d3.selectAll("g.y-axis g.tick")
-        .append("line")
-        .classed("grid-line", true)
-        .attr("x1", 0)
-        .attr("y1", 0)
-        .attr("x2", xAxisLen)
-        .attr("y2", 0);
+    
+    // отображаем данные в виде диаграммы 
     let segmentWidth = scaleX.bandwidth()
     svg.selectAll(".dot")
         .data(xLabels)
         .enter()
         .append("rect")
-        .attr("x", function (xLabel) { return scaleX(xLabel) })
+        .attr("x", function(xLabel) { return scaleX(xLabel) })
         .attr("width", segmentWidth)
         .attr("y", function (xLabel) { return scaleY(graphData[xLabel]) })
         .attr("height", function (xLabel) { return yAxisLen - scaleY(graphData[xLabel]); })
